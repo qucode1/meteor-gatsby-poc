@@ -5,12 +5,21 @@ import gql from "graphql-tag"
 import JobForm from "./JobForm"
 import RegisterForm from "./RegisterForm"
 import LoginForm from "./LoginForm"
-import LogoutButton from "./Button"
+import Button from "./Button"
+
+const LogoutButton = Button
+const RebuildButton = Button
 
 const Auth = ({ loading, user, client }) => {
   const logout = () => {
     Meteor.logout()
     client.resetStore()
+  }
+  const triggerRebuild = () => {
+    fetch(Meteor.settings.public.buildHook, {
+      method: 'POST'
+    }).catch(error => console.error('Error', error))
+      .then(() => console.log("Rebuild successfully triggered"))
   }
   return (
     <Fragment>
@@ -18,13 +27,14 @@ const Auth = ({ loading, user, client }) => {
         <Fragment>
           <LogoutButton onClick={logout} name="Logout" />
           <JobForm />
+          <RebuildButton onClick={triggerRebuild} name="Rebuild" />
         </Fragment>
       ) : (
-        <Fragment>
-          <RegisterForm client={client} />
-          <LoginForm client={client} />
-        </Fragment>
-      )}
+          <Fragment>
+            <RegisterForm client={client} />
+            <LoginForm client={client} />
+          </Fragment>
+        )}
     </Fragment>
   )
 }
