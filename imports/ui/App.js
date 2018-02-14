@@ -1,15 +1,18 @@
 import React, { Fragment } from "react"
+import { Route } from 'react-router-dom'
 import { withApollo } from "react-apollo"
 
-import JobList from "./JobList"
-import Auth from "./Auth"
+import Index from './Index'
+import JobDetails from "./JobDetails"
+import JobForm from "./JobForm"
 
-const App = ({ client }) => (
+const App = () => (
   <Fragment>
-    <h1>Jobs</h1>
-    <Auth client={client} />
-    <JobList />
+    <Route exact path='/' component={Index} />
+    <Route exact path='/job/:id' component={JobDetails} />
+    <Route exact path='/job/:id/edit' render={(props) => <JobForm update {...props} />} />
+    <Route exact path='/jobs/new' component={JobForm} />
   </Fragment>
 )
 
-export default withApollo(App)
+export default App

@@ -5,6 +5,9 @@ export default {
   Query: {
     jobs(obj, args, { user }) {
       return Jobs.find({}).fetch()
+    },
+    job(obj, { _id }, { user }) {
+      return Jobs.findOne({ _id })
     }
   },
   Mutation: {

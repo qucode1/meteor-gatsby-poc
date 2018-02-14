@@ -8,6 +8,7 @@ type Job {
 
 type Query {
     jobs: [Job]
+    job(_id: String!): Job
 }
 
 type Mutation {

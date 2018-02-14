@@ -1,6 +1,8 @@
 import React, { Fragment } from "react"
+import { Route, Link } from 'react-router-dom'
 import { graphql } from "react-apollo"
 import gql from "graphql-tag"
+
 import Job from "./Job"
 
 const JobList = ({ jobs, loading }) => (
@@ -14,7 +16,6 @@ const jobQuery = gql`
     jobs {
       _id
       title
-      description
       locations
     }
   }

@@ -2,7 +2,6 @@ import React, { Fragment } from "react"
 import { graphql } from "react-apollo"
 import gql from "graphql-tag"
 
-import JobForm from "./JobForm"
 import RegisterForm from "./RegisterForm"
 import LoginForm from "./LoginForm"
 import Button from "./Button"
@@ -26,7 +25,6 @@ const Auth = ({ loading, user, client }) => {
       {!loading && user._id ? (
         <Fragment>
           <LogoutButton onClick={logout} name="Logout" />
-          <JobForm />
           <RebuildButton onClick={triggerRebuild} name="Rebuild" />
         </Fragment>
       ) : (

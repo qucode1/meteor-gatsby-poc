@@ -1,22 +1,29 @@
 import React, { Fragment } from "react"
 import { graphql, compose } from "react-apollo"
+import { Link } from "react-router-dom"
 import gql from "graphql-tag"
 
-import DeleteButton from "./Button"
+import Button from "./Button"
+
+const EditButton = Button
+const DeleteButton = Button
 
 const Job = ({ job, user, loading, deleteJob }) => (
   <Fragment>
     <h3>{job.title}</h3>
-    <p>{job.description}</p>
     <p>{job.locations}</p>
+    <Link to={`/job/${job._id}`} >More Details...</Link>
     {!loading &&
       user._id && (
-        <DeleteButton
-          onClick={() => {
-            deleteJob({ variables: { id: job._id } })
-          }}
-          name="Delete"
-        />
+        <Fragment>
+          <Link to={`/job/${job._id}/edit`} >Edit</Link>
+          <DeleteButton
+            onClick={() => {
+              deleteJob({ variables: { id: job._id } })
+            }}
+            name="Delete"
+          />
+        </Fragment>
       )}
   </Fragment>
 )

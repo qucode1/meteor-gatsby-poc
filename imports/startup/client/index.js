@@ -6,6 +6,7 @@ import { ApolloClient } from "apollo-client"
 import { ApolloLink, from } from "apollo-link"
 import { HttpLink } from "apollo-link-http"
 import { InMemoryCache } from "apollo-cache-inmemory"
+import { BrowserRouter as Router } from "react-router-dom"
 
 import App from "../../ui/App"
 
@@ -32,7 +33,9 @@ const client = new ApolloClient({
 
 const ApolloApp = () => (
   <ApolloProvider client={client}>
-    <App />
+    <Router>
+      <App />
+    </Router>
   </ApolloProvider>
 )
 
