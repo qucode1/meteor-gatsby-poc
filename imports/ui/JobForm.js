@@ -85,29 +85,93 @@ class JobForm extends Component {
   }
   render() {
     return (
-      <Fragment>
-        {this.props.update ? <h1>Update Job: {this.state.title}</h1> : <h1>Add Job</h1>}
+      <div className="root">
+        <Link to="/">Go Back</Link>
         <form onSubmit={this.submitForm}>
-          <input name="title" type="text" onChange={this.handleChange} value={this.state.title} />
-          <ul>
-            {this.state.locations && this.state.locations.length > 0 && (
-              this.state.locations.map(location => (
-                <li key={`${this.props.job_id}-${location}`} >{location}</li>
-              ))
-            )}
-          </ul>
-          <input type="text" ref={input => this.newLocation = input} />
+          {this.props.update
+            ? <legend><h1>Update Job: {this.state.title}</h1></legend>
+            : <legend><h1>Add Job</h1></legend>
+          }
+          <input
+            name="title"
+            type="text"
+            placeholder="Job Title"
+            onChange={this.handleChange}
+            value={this.state.title}
+          />
+          {this.state.locations
+            && this.state.locations.length > 0
+            && (
+              <ul>
+                {this.state.locations.map(location => (
+                  <li key={`${this.props.job_id}-${location}`} >
+                    {location}
+                  </li>
+                ))}
+              </ul>
+            )
+          }
+          <input type="text" ref={input => this.newLocation = input} placeholder="Location" />
           <button onClick={this.addLocation}>Add Location</button>
-          <textarea name="description" cols="50" rows="10" placeholder="Description" value={this.state.description} onChange={this.handleChange} />
-          <button type="submit">{this.props.update ? 'Update Job' : 'Add Job'}</button>
+          <textarea
+            name="description"
+            cols="50"
+            rows="10"
+            placeholder="Description"
+            value={this.state.description}
+            onChange={this.handleChange}
+          />
+          <button type="submit">
+            {this.props.update ? 'Update Job' : 'Add Job'}
+          </button>
         </form>
         {
           this.state.submitted && (
-            <Redirect push to={this.props.update ? `/job/${this.props.job._id}` : `/`} />
+            <Redirect
+              push
+              to={this.props.update ? `/job/${this.props.job._id}` : `/`}
+            />
           )
         }
-        <Link to="/">Go Back</Link>
-      </Fragment>
+        <style jsx>{`
+          .root {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 100%
+          }
+          form {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: flex-start;
+            align-self: center;
+            border: 5px solid rebeccapurple;
+            border-radius: 5px;
+          }
+          legend {
+            background-color: rebeccapurple;
+            color: #fff;
+            width: 100%;
+            padding: 0 10px;
+          }
+          ul {
+            list-style-type: none;
+            display: flex;
+          }
+          li {
+            background-color: rgb(206, 60, 60);
+            color: #fff;
+          }
+          textarea {
+            border-radius: 5px;
+            border: 1px solid rgba(0,0,0,.3);
+          }
+          input, textarea, ul, li {
+            padding: 5px;
+            margin: 5px;
+          }
+          `}</style>
+      </div>
     )
   }
 }
@@ -118,15 +182,29 @@ const createJob = gql`
     $description: String
     $locations: [String]
   ) {
-    createJob(title: $title, description: $description, locations: $locations) {
+    createJob(
+      title: $title, 
+      description: $description, 
+      locations: $locations
+    ) {
       _id
     }
   }
 `
 
 const updateJob = gql`
-  mutation($id: String!, $title: String, $description: String, $locations: [String]) {
-    updateJob(_id: $id, title: $title, description: $description, locations: $locations)
+  mutation(
+    $id: String!, 
+    $title: String, 
+    $description: String, 
+    $locations: [String]
+  ) {
+    updateJob(
+      _id: $id, 
+      title: $title, 
+      description: $description, 
+      locations: $locations
+    )
 }
 `
 

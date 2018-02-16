@@ -1,15 +1,15 @@
 import React, { Fragment } from 'react'
-import { withApollo, graphql } from "react-apollo"
+import { graphql } from "react-apollo"
 import { Link } from "react-router-dom"
 import gql from 'graphql-tag'
 
-import Header from './Header'
+
 import JobList from './JobList'
 import JobForm from './JobForm'
 
-const Index = ({ client, loading, user }) => (
+const Index = ({ loading, user }) => (
     <Fragment>
-        <Header client={client} />
+
         <h1>Jobs</h1>
         {
             !loading && user._id
@@ -30,4 +30,4 @@ const userQuery = gql`
 
 export default graphql(userQuery, {
     props: ({ data }) => ({ ...data })
-})(withApollo(Index))
+})(Index)

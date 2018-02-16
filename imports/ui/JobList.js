@@ -17,6 +17,7 @@ const jobQuery = gql`
       _id
       title
       locations
+      shortDescription
     }
   }
 `

@@ -4,10 +4,23 @@ import Auth from "./Auth"
 
 const Header = ({ client }) => {
     return (
-        <Fragment>
+        <div className="root">
             <h2>Job CMS</h2>
             <Auth client={client} />
-        </Fragment>
+            <style jsx>{`
+                .root {
+                    display: flex;
+                    justify-content: space-between;
+                    background-color: rebeccapurple;
+                    color: #fff;
+                    padding: 15px 10px
+                }
+                h2 {
+                    margin: 0
+                }
+            `}</style>
+
+        </div>
     )
 }
 

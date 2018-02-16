@@ -7,7 +7,7 @@ import JobResolvers from "../../api/job/resolvers"
 import UserSchema from "../../api/user/user.graphql"
 import UserResolvers from "../../api/user/resolvers"
 
-// hiiiiiiiii
+// hiiiiiiiiii
 const typeDefs = [JobSchema, UserSchema]
 const resolvers = merge(JobResolvers, UserResolvers)
 

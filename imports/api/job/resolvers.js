@@ -13,8 +13,10 @@ export default {
   Mutation: {
     createJob(obj, { title, description, locations }, { user }) {
       if (user._id) {
+        const shortDescription = description.substring(0, 96) + "..."
         const jobId = Jobs.insert({
           title,
+          shortDescription,
           description,
           locations
         })
@@ -31,7 +33,10 @@ export default {
       if (userId) {
         const updates = {}
         title && (updates.title = title)
-        description && (updates.description = description)
+        description && (
+          updates.description = description,
+          updates.shortDescription = description.substring(0, 96) + "..."
+        )
         locations && locations.length > 0 && (updates.locations = locations)
 
         const jobId = Jobs.update({ _id }, { $set: { ...updates } })

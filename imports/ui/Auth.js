@@ -18,14 +18,14 @@ const Auth = ({ loading, user, client }) => {
     fetch(Meteor.settings.public.buildHook, {
       method: 'POST'
     }).catch(error => console.error('Error', error))
-      .then(() => console.log("Rebuild successfully triggered"))
+      .then(() => console.log("Rebuild successfully triggered", Meteor.settings.public.buildHook))
   }
   return (
     <Fragment>
       {!loading && user._id ? (
         <Fragment>
-          <LogoutButton onClick={logout} name="Logout" />
-          <RebuildButton onClick={triggerRebuild} name="Rebuild" />
+          <RebuildButton onClick={triggerRebuild} name="Rebuild" bgColor="#fff" color="rebeccapurple" />
+          <LogoutButton onClick={logout} name="Logout" bgColor="#fff" color="rebeccapurple" />
         </Fragment>
       ) : (
           <Fragment>

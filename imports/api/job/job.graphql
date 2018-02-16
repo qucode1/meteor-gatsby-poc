@@ -1,6 +1,7 @@
 type Job {
     _id: String!
     title: String!
+    shortDescription: String
     description: String
     locations: [String]
 

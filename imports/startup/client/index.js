@@ -8,6 +8,8 @@ import { HttpLink } from "apollo-link-http"
 import { InMemoryCache } from "apollo-cache-inmemory"
 import { BrowserRouter as Router } from "react-router-dom"
 
+import 'normalize.css'
+
 import App from "../../ui/App"
 
 const httpLink = new HttpLink({

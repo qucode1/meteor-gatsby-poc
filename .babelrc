@@ -1,5 +1,6 @@
 {
     "plugins": [
-        "babel-plugin-inline-import"
+        "babel-plugin-inline-import",
+        "styled-jsx/babel"
     ]
 }
