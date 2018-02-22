@@ -6,6 +6,7 @@ import gql from 'graphql-tag'
 
 import JobList from './JobList'
 import JobForm from './JobForm'
+import Button from "./Button"
 
 const Index = ({ loading, user }) => (
     <Fragment>
@@ -13,7 +14,7 @@ const Index = ({ loading, user }) => (
         <h1>Jobs</h1>
         {
             !loading && user._id
-            && <Link to="/jobs/new">Add a Job</Link>
+            && <Link to="/jobs/new"><Button name="Add a Job" /></Link>
         }
         <JobList />
     </Fragment>

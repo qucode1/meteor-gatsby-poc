@@ -1,18 +1,20 @@
 import React from "react"
 
-export default ({ onClick, name, bgColor, color, className = "" }) => (
+export default Button = ({ onClick, name = "button", bgColor, color, className = "", inverted = false, type = 'button', children }) => (
   <button
+    name={name}
     className={`${className}`}
-    onClick={e => {
-      e.preventDefault()
-      onClick()
-    }}
+    type={type}
+    onClick={onClick && (e => {
+      onClick(e)
+    })}
   >
     {name}
+    {children}
     <style jsx>{`
       button {
-        ${bgColor && `background-color: ${bgColor};`}
-        ${color && `color: ${color};`}
+        ${bgColor && `background-color: ${(color && inverted) ? color : bgColor}`};
+        ${color && `color: ${(bgColor && inverted) ? bgColor : color}`};
       }
     `}</style>
   </button>

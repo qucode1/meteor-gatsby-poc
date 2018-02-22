@@ -3,6 +3,7 @@ import gql from "graphql-tag"
 import { graphql, compose } from "react-apollo"
 import { Link, Redirect } from 'react-router-dom'
 
+import Button from './Button'
 
 class JobForm extends Component {
   constructor(props) {
@@ -86,7 +87,7 @@ class JobForm extends Component {
   render() {
     return (
       <div className="root">
-        <Link to="/">Go Back</Link>
+        <Link to="/"><Button name="Go Back" /></Link>
         <form onSubmit={this.submitForm}>
           {this.props.update
             ? <legend><h1>Update Job: {this.state.title}</h1></legend>
@@ -121,7 +122,7 @@ class JobForm extends Component {
             value={this.state.description}
             onChange={this.handleChange}
           />
-          <button type="submit">
+          <button className="submit" type="submit">
             {this.props.update ? 'Update Job' : 'Add Job'}
           </button>
         </form>
@@ -135,6 +136,9 @@ class JobForm extends Component {
         }
         <style jsx>{`
           .root {
+            --padding: 5px;
+            --margin: 5px;
+
             display: flex;
             flex-direction: column;
             align-items: flex-start;
@@ -167,8 +171,14 @@ class JobForm extends Component {
             border: 1px solid rgba(0,0,0,.3);
           }
           input, textarea, ul, li {
-            padding: 5px;
-            margin: 5px;
+            padding: var(--padding);
+            margin: var(--margin);
+          }
+          input, textarea {
+            width: calc(100% - var(--padding) - var(--margin))
+          }
+          .submit {
+            align-self: flex-end;
           }
           `}</style>
       </div>
@@ -213,6 +223,7 @@ const jobQuery = gql`
     job(_id: $id) {
       _id
       title
+      shortDescription
       description
       locations
     }
@@ -229,7 +240,7 @@ export default compose(
   graphql(updateJob, {
     name: "updateJob",
     options: {
-      refetchQueries: ["Jobs"]
+      refetchQueries: ["JobDetails", "Jobs"]
     }
   }),
   graphql(jobQuery, {

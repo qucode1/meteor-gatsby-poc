@@ -4,6 +4,7 @@ import { userInfo } from "os"
 export default {
   Query: {
     jobs(obj, args, { user }) {
+
       return Jobs.find({}).fetch()
     },
     job(obj, { _id }, { user }) {
@@ -35,12 +36,11 @@ export default {
         title && (updates.title = title)
         description && (
           updates.description = description,
-          updates.shortDescription = description.substring(0, 96) + "..."
+          updates.shortDescription = description.length > 100 ? description.substring(0, 96) + "..." : description
         )
         locations && locations.length > 0 && (updates.locations = locations)
 
-        const jobId = Jobs.update({ _id }, { $set: { ...updates } })
-        console.log(jobId)
+        Jobs.update({ _id }, { $set: { ...updates } })
         return `Job (${_id}) has been updated!`
       } else return `You are not authorized to do update a Job`
     }

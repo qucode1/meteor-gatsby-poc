@@ -29,7 +29,10 @@ const App = ({ client }) => (
           padding: 0
       }
       main {
-          padding: 10px
+          padding: 10px;
+          min-width: 300px;
+          width: 70vW;
+          margin: auto
       }
       button {
           cursor: pointer;

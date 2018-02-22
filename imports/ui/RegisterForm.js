@@ -1,6 +1,8 @@
 import React, { Component } from "react"
 import { Accounts } from "meteor/accounts-base"
 
+import Button from "./Button"
+
 export default class RegisterForm extends Component {
   registerUser = e => {
     e.preventDefault()
@@ -21,7 +23,7 @@ export default class RegisterForm extends Component {
       <form onSubmit={this.registerUser}>
         <input type="email" ref={input => (this.email = input)} />
         <input type="password" ref={input => (this.password = input)} />
-        <button type="submit">Register</button>
+        <Button type="submit" name="Register" color="rebeccapurple" bgColor="#fff" />
       </form>
     )
   }

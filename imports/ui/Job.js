@@ -73,7 +73,7 @@ const Job = ({ job, user, loading, deleteJob }) => (
                                 "sDescr sDescr sDescr moreDetails"
                                 "edit edit edit edit";
           border: 2px solid rebeccapurple;
-          margin: 15px 10px;
+          margin: 10px 0px;
           padding: 5px;
           align-items: center;
           justify-content: space-between;
