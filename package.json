@@ -2,7 +2,9 @@
   "name": "meteor-gatsby-poc",
   "private": true,
   "scripts": {
-    "start": "meteor run --settings settings.json"
+    "dev": "meteor run --settings development.settings.json",
+    "productionBuild": "demeteorizer -o ../mg-output/",
+    "productionTestBuild": "npm install && meteor build ../mg-output && cd ../mg-output  && tar -zxf meteor-gatsby-poc.tar.gz && cd bundle/programs/server && npm install && node ../../main.js"
   },
   "dependencies": {
     "@babel/runtime": "^7.0.0-beta.36",
@@ -12,6 +14,7 @@
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "express": "^4.16.2",
+    "fibers": "^2.0.0",
     "graphql": "^0.12.3",
     "graphql-server-express": "^1.3.2",
     "graphql-tag": "^2.6.1",

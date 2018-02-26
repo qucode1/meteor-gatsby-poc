@@ -1,3 +1,6 @@
 node_modules/
 .env
-settings.json
+development.settings.json
+.meteor/local
+meteor-gatsby-poc.tar.gz
+.demeteorized
